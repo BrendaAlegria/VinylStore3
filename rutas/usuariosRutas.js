@@ -160,19 +160,19 @@ ruta.post("/editar", subirArchivo(), async (req, res) => {
 });
 
 //BORRAR UN USUARIO 
-ruta.get("/borrar/:id", async (req, res) => {
-  try {
-    var usuario=await buscarPorID(req.params.id);
-    await borrarUsuario(req.params.id);
-    fs.unlinkSync('./web/images/'+usuario.foto);
-    console.log('Imagen Borrada');
-    res.redirect("/mosUsu");
+  ruta.get("/borrar/:id", async (req, res) => {
+    try {
+      var usuario=await buscarPorID(req.params.id);
+      await borrarUsuario(req.params.id);
+      fs.unlinkSync('./web/images/'+usuario.foto);
+      console.log('Imagen Borrada');
+      res.redirect("/mosUsu");
 
-  } catch (error) {
-    console.error('No se puede borrar el usuario', error);
-  
-  }
-});
+    } catch (error) {
+      console.error('No se puede borrar el usuario', error);
+    
+    }
+  });
 //MODIFICAR MI CUENTA
 ruta.get("/modiCuenta", async (req, res) => {
   const usuarioId = req.session.usuarioId;
@@ -182,7 +182,6 @@ ruta.get("/modiCuenta", async (req, res) => {
       const usuario = await buscarPorID(usuarioId);
       if (!usuario) {
         console.error("Usuario no encontrado");
-        res.status(404).send("Usuario no encontrado");
         return;
       }
       res.render("Paginas/modCuenta", { usuarioId, tipo, user: usuario });

@@ -136,7 +136,7 @@ res.redirect("/dis/dis/mostrarDis");
 //BORRAR UN DISCO
 rutasDis.get("/dis/borrarDis/:id", async (req, res) => {
   try {
-    var disco=await buscarPorID(req.params.id);
+    var disco=await buscarDiscoPorID(req.params.id);
     await borrarDisco(req.params.id);
     fs.unlinkSync('./web/images/'+disco.foto);
     console.log('Imagen Borrada Del Vinilo');
@@ -153,6 +153,7 @@ rutasDis.get("/dis/borrarDis/:id", async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
 
 
 
