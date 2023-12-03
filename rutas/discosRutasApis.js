@@ -71,16 +71,16 @@ rutasDis.get("/dis/meGustaUsuarios", async (req, res) => {
 
 
 
-// API para obtener y mostrar discos
+
 rutasDis.get("/dis/mostrarDis", async (req, res) => {
   try {
     var discos = await mostrarDiscos();
     const tipo = req.session.usuario || undefined; 
     res.render("Discos/mostrarDis", { discos, tipo });
-  } catch (error) {
+    } catch (error) {
     console.error("Error al obtener las obras:", error);
     res.status(500).send("Error interno del servidor");
-  }
+    }
 });
 
 //GALERIA DE VINILOS Pero de Consumo REGISTRO DE VINILOS 
@@ -89,22 +89,21 @@ rutasDis.get('/dis/galeriaD',async (req, res) => {
   res.render("Discos/galeriaD", {tipo });
 }); 
 
-// API CREAR  NUEVO DISCOo
+//CREAR UN NUEVO DISCO
 rutasDis.get("/dis/newDis", (req, res) => {
   const tipo = req.session.usuario || undefined;
   res.render("Discos/nuevoDis", { tipo: tipo });
 });
 
-rutasDis.post("/dis/newDis", subirArchivo(), async (req, res) => {
+rutasDis.post("/dis/newDis", subirArchivo() ,/*subirAudio(),*/ async (req, res) => {
   req.body.foto = req.file.originalname;
+  /*req.body.audio = req.file.originalname;*/
   var error = await nuevoDisco(req.body);
   const tipo = req.session.usuario || undefined;
   res.redirect("/dis/dis/mostrarDis");
 });
 //RUTAS EDITAR O modificar un vinilo
 
-
-// API para mostrar el formulario de edición de un disco
 rutasDis.get("/dis/editarDis/:id", async (req, res) => {
   try {
     var disc = await buscarDiscoPorID(req.params.id);
@@ -116,26 +115,39 @@ rutasDis.get("/dis/editarDis/:id", async (req, res) => {
   }
 });
 
+rutasDis.post("/dis/editarDis", subirArchivo()/*,subirAudio()*/, async (req, res) => {
+  //req.body.foto=req.file.originalname;
+if(req.file != undefined){
+  req.body.foto=req.file.originalname;
+}
+else{
+  req.body.foto=req.body.fotoVieja;
+}
+// Verifica si se subió un nuevo archivo de audio
+/*if (req.fileAudio !== undefined) {
+  req.body.audio = req.fileAudio.originalname;
+} else {
+  req.body.audio = req.body.audioViejo;
+}*/
+var error = await modificarDisco(req.body);
+res.redirect("/dis/dis/mostrarDis");
 
-// API EDITAR
-rutasDis.post("/dis/editarDis", subirArchivo(), async (req, res) => {
-  if(req.file !== undefined){
-    req.body.foto=req.file.originalname;
-  } else {
-    req.body.foto=req.body.fotoVieja;
-  }
-  var error = await modificarDisco(req.body);
-  res.redirect("/dis/dis/mostrarDis");
 });
-
-//API BORRAR UN DISCO
+//BORRAR UN DISCO
 rutasDis.get("/dis/borrarDis/:id", async (req, res) => {
   try {
-    var disco = await buscarPorID(req.params.id);
+    var disco=await buscarPorID(req.params.id);
     await borrarDisco(req.params.id);
-    fs.unlinkSync('./web/images/' + disco.foto);
+    fs.unlinkSync('./web/images/'+disco.foto);
     console.log('Imagen Borrada Del Vinilo');
+    
+    // Verificar si hay un archivo de audio y eliminarlo
+    /*if (disco.audio) {
+      fs.unlinkSync('./web/audio/' + disco.audio);
+      console.log('Audio Borrado Del Vinilo');
+    }*/
     res.redirect("/dis/dis/mostrarDis");
+
   } catch (error) {
     console.error('No se puede borrar el vinilo', error);
     res.status(500).send('Internal Server Error');

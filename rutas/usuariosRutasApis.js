@@ -21,44 +21,51 @@ ruta.get('/mosUsu',async  (req, res) => {
 });
 
 //GALERIA DE VINILOS 
-// GALERIA DE VINILOS
-ruta.get('/discos', async (req, res) => {
+ruta.get('/galeria',async  (req, res) => {
   try {
-    const discos = await mostrarDiscos();
+    // Obtener datos de discos
+    const discos = await mostrarDiscos(); // Asegúrate de tener esta función definida
     const tipo = req.session.usuario || undefined;
-    res.json({ tipo, discos });
+    res.render("usuarios/galeria", { tipo, discos });
   } catch (error) {
     console.error('Error al cargar la galería:', error);
-    res.status(500).json({ error: 'Error interno del servidor' });
   }
 });
 
-// MENU VERIFICAR SI ES ADMIN O USUARIO
-ruta.get('/usuarios/menu', autorizado, async (req, res) => {
-  const tipo = req.session.usuario || undefined;
-  const usuarios = await mostrarUsuarios();
 
-  if (tipo === 'admin') {
-    res.json({ usuarios, tipo });
+//MENU VERIFICAR SI ES ADMIN O USUARIO
+ruta.get("/usuarios", autorizado, async (req, res) => {
+  var tipo;
+  var usuarios = await mostrarUsuarios();
+  
+  if (req.session.usuario) {
+    tipo = req.session.usuario; 
+    
+    if (tipo === "admin") {
+      res.render("Usuarios/mostrarAdmin", { usuarios, tipo });
+    } else {
+      res.render("Usuarios/mostrarUsuarios", { usuarios, tipo });
+    }
   } else {
-    res.json({ usuarios, tipo });
+    tipo = undefined;
+    res.render("Usuarios/mostrarUsuarios", { usuarios, tipo });
   }
 });
 
-// ACERCA DE
-ruta.get('/about', (req, res) => {
+//ACERCA DE
+ruta.get("/about", (req, res) => {
   const tipo = req.session.usuario || undefined;
-  res.json({ tipo });
+  res.render("Usuarios/about",{ tipo});
 });
-
-// ELIMINAR CADA QUIEN SU CUENTA
-ruta.get('/usuarios/delete', async (req, res) => {
+//ELIMINAR CADA QUIEN SU CUENTA 
+ruta.get("/elimiCuen", async (req, res) => {
   const usuarioId = req.session.usuarioId;
   if (usuarioId) {
     const tipo = req.session.usuario || undefined;
-    res.json({ tipo, usuarioId });
+    res.render("Paginas/borarCuenta", { tipo: req.session.usuario, usuarioId });
+    // No es necesario borrar el usuario aquí
   } else {
-    res.status(401).json({ error: 'No autorizado' });
+    res.redirect("/login"); 
   }
 });
 
@@ -75,11 +82,9 @@ ruta.get("/elimiCuen/:id", async (req, res) => {
       await borrarUsuario(usuarioId);
       res.redirect("/login");
     } else {
-      res.status(404).send("Usuario no encontrado");
     }
   } catch (error) {
     console.error("Error al intentar borrar la cuenta:", error);
-    res.status(500).send("Error al intentar borrar la cuenta");
   }
 });
 
@@ -91,11 +96,11 @@ ruta.get("/nuevousu", (req, res) => {
   res.render("Usuarios/nuevo");
 });
 
-// AGREGAR NUEVO USUARIO
-ruta.post('/usuarios', subirArchivo(), async (req, res) => {
-  req.body.foto = req.file.originalname;
-  const error = await nuevoUsuario(req.body);
-  res.json({ message: 'Usuario ingresado correctamente' });
+ruta.post("/nuevousu",subirArchivo(), async (req, res) => {
+  req.body.foto=req.file.originalname;
+  var error = await nuevoUsuario(req.body);
+  res.redirect("/login");
+  console.log("Usuario Ingresado correctamente");
 });
 
 //RUTA LOGIN
@@ -103,31 +108,30 @@ ruta.get("/login", async (req, res) =>{
 res.render ("Usuarios/login");
 });
 
-// RUTA LOGIN
-ruta.post('/login', async (req, res) => {
-  const { usuario, password } = req.body;
-  const usuarioEnt = await buscarPorUsuario(usuario);
+ruta.post("/login", async (req, res) => {
+  var { usuario, password } = req.body;
+  var usuarioEnt = await buscarPorUsuario(usuario);
   if (usuarioEnt) {
-    const passwordCorrect = await verificarPassword(
-      password,
-      usuarioEnt.password,
-      usuarioEnt.salt
-    );
+    var passwordCorrect = await verificarPassword(password, usuarioEnt.password, usuarioEnt.salt);
     if (passwordCorrect) {
       req.session.usuarioId = usuarioEnt.id;
       if (usuarioEnt.admin) {
         req.session.admin = usuarioEnt.admin;
-        req.session.usuario = usuarioEnt.usuario;
-        res.json({ message: 'Iniciaste sesión como Admin' });
+        req.session.usuario = usuarioEnt.usuario; 
+        res.redirect("/mosUsu");
+        console.log("Iniciaste sesion como Admin");
       } else {
         req.session.usuario = usuarioEnt.usuario;
-        res.json({ message: 'Iniciaste sesión como Usuario' });
+        res.redirect("/galeria"); 
+        console.log("Iniciaste sesion como Usuario");
       }
     } else {
-      res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+      console.log("Usuario o contraseña incorrectos");
+      res.render("usuarios/login");
     }
   } else {
-    res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+    console.log("Usuario o contraseña incorrectos");
+    res.render("usuarios/login");
   }
 });
 
@@ -138,35 +142,35 @@ ruta.get("/editar/:id", async (req, res) => {
   console.log(user);
   res.render("usuarios/modificar", { user });
 });
-// MODIFICAR USUARIO - ACTUALIZAR DATOS
-ruta.put("/usuarios/edit", subirArchivo(), async (req, res) => {
-  try {
-    if (req.file) {
-      req.body.foto = req.file.originalname;
-    } else {
-      req.body.foto = req.body.fotoVieja;
-    }
-    const error = await modificarUsuario(req.body);
-    res.json({ message: 'Usuario modificado correctamente' });
-  } catch (error) {
-    console.error('Error al modificar el usuario:', error);
-    res.status(500).json({ error: 'Error interno del servidor' });
+
+ruta.post("/editar", subirArchivo(), async (req, res) => {
+   //req.body.foto=req.file.originalname;
+  if(req.file != undefined){
+    req.body.foto=req.file.originalname;
   }
+  else{
+    req.body.foto=req.body.fotoVieja;
+  }
+  /*console.log(req.body);
+  res.end();*/ 
+  var error = await modificarUsuario(req.body);
+  res.redirect("/mosUsu");
+ 
+  
 });
 
-// BORRAR UN USUARIO
-ruta.delete("/usuarios/delete/:id", async (req, res) => {
+//BORRAR UN USUARIO 
+ruta.get("/borrar/:id", async (req, res) => {
   try {
-    const usuario = await buscarPorID(req.params.id);
+    var usuario=await buscarPorID(req.params.id);
     await borrarUsuario(req.params.id);
-    if (usuario.foto) {
-      fs.unlinkSync('./web/images/' + usuario.foto);
-      console.log('Imagen Borrada');
-    }
-    res.json({ message: 'Usuario eliminado correctamente' });
+    fs.unlinkSync('./web/images/'+usuario.foto);
+    console.log('Imagen Borrada');
+    res.redirect("/mosUsu");
+
   } catch (error) {
     console.error('No se puede borrar el usuario', error);
-    res.status(500).json({ error: 'Error interno del servidor' });
+  
   }
 });
 //MODIFICAR MI CUENTA
@@ -184,7 +188,7 @@ ruta.get("/modiCuenta", async (req, res) => {
       res.render("Paginas/modCuenta", { usuarioId, tipo, user: usuario });
     } catch (error) {
       console.error("Error al cargar la página de modificación:", error);
-      res.status(500).send("Error interno del servidor al intentar cargar la página de modificación");
+     
     }
   } else {
     res.redirect("/login"); 
@@ -221,7 +225,7 @@ ruta.post("/modiCuenta/:id", subirArchivo(), async (req, res) => {
     res.redirect("/login");
   } catch (error) {
     console.error("Error al modificar la cuenta:", error);
-    res.status(500).send("Error interno del servidor");
+   
   }
 });
 
