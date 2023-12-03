@@ -1,0 +1,28 @@
+<%- include ("../templates/encaInici")%>
+<% if (tipo == undefined) { %>
+    <%- include ("../templates/menuAdmin")%>
+<% } else { %>
+    <%- include ("../templates/menuUsuarios")%>
+<% } %>
+<header>
+    <h1>Galería de Vinilos</h1>
+</header>
+<br>
+<div class="gallery">
+    <% discos.forEach((disco) => { %>
+        <div class="image">
+            <img src="/images/<%= disco.foto %>" alt="<%= disco.nombre %>" class="imagen-disco">
+            <div class="card-body">
+                <h4 class="card-title custom-font"><%= disco.nombre %></h4>
+                <p class="card-text custom-font">Artista: <%= disco.artista %></p>
+                <p class="card-text custom-font">Duración: <%= disco.duracion %></p>
+                <p class="card-text custom-font">Precio: <%= disco.precio %></p>
+                <br>
+            <form method="POST" action="/dis/dis/agreLike/<%= disco.id %>">
+                <button type="submit" class="form-control  btn btn-primary">Me Gusta</button>
+            </form>
+            </div>
+        </div>
+    <% }); %>
+</div>
+<%- include ("../templates/pie")%>

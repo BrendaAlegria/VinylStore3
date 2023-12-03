@@ -1,0 +1,30 @@
+<%- include ("../templates/encaInici")%>
+
+<header>
+    <h1>Modificar Usuario</h1>
+</header>
+<div class="container mt-5">
+    <form action="/editar" method="post" enctype="multipart/form-data"> 
+        <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+                <input type="hidden" name="id" id="id" value="<%= user.id%>">
+                <input type="hidden" name="passwordViejo" id="passwordViejo" value="<%= user.password%>">
+                <input type="hidden" name="saltViejo" id="saltViejo" value="<%= user.salt%>">
+                <input class="form.control mb-3" type="text" value="<%= user.nombre%>" name="nombre" id="nombre"  placeholder="Nombre" autofocus>
+                <input class="form.contro mb-3" type="text" value="<%= user.usuario%>" name="usuario" id="usuario"  placeholder="Usuario" >
+                <input class="form.control mb-3" type="password" name="password" id="password"  placeholder="Mantener el campo en blanco para no modificar" >
+                <input class="form-control mb-3" type="file" name="foto" id="foto">
+            </div>
+            <div class="card-footer">
+                <button class="form-control btn btn-primary" type="submit">Modificar Usuario</button>
+            </div>
+            <div class="absolutee">
+                <h2><a class="boton" href="/mosUsu">Regresar</a></h2> 
+            </div>
+        </div>
+    </form>
+</div>
+
+<%- include ("../templates/pie")%>

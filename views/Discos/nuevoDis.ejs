@@ -1,0 +1,34 @@
+<%-include ("../templates/encaInici")%>
+<% if (tipo === 'admin') { %>
+  <%- include ("../templates/menuUsuarios")%>
+<% } else { %>
+  <%- include ("../templates/menuAdmin")%>
+<% } %>
+<header>
+    <h1>Nuevo Disco</h1>
+</header>
+<br>
+<div class="container mt-77">
+    <form action="/dis/dis/newDis" method="post"  enctype="multipart/form-data"> 
+        <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+                <input class="form.control mb-3" type="text" name="nombre" id="nombre"  placeholder="Nombre" autofocus required>
+                <input class="form.control mb-3" type="text" name="artista" id="artista"  placeholder="Artista" required >
+                <input class="form.control mb-3" type="text" name="duracion" id="duracion"  placeholder="Duracion" required>
+                <input class="form.control mb-3" type="text" name="precio" id="precio"  placeholder="Precio" required >
+                <p>Foto:</p>
+                <input class="form-control mb-3" type="file" name="foto" id="foto">
+                <!--
+                    <p>Disco:</p>
+                <input class="form-control mb-3" type="file" name="audio" id="audio">
+                 -->
+            </div>
+            <div class="card-footer">
+                <button class="form-control btn btn-primary" type="submit">Guardar Vinilo</button>
+            </div>
+        </div>
+    </form>
+</div>
+<%- include ("../templates/pie")%>

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "vinyl-store-31c54",
+  "private_key_id": "f9570723f2f6b74162510d4d549ee0bcd16e4706",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDa+8gDrwtMfW2P\np/iW/7lvmHjprJSHYr61qDB1IMN1eGMgswPWDFUMLDU/togJqQjf3am1TbxGtGX6\nNNFU0eBIQvClJiLcJeFGmA5zGH2AoxgNHcUIIQIKCgzHoTgAFall99h/hdDFx1oy\n12V5e593XFQ17srgceyyf78Ngr+F7Yu6DpvrUo7UMDuHKan/XsyLyko8V3gCHrH0\nWly6ruS1n7+vvypd+Ev/ccVwZJMEFO5YNTsrYHS8GEHaSSGCIGl/nWhwrN3v9DC+\n4Rpm9waV4QYIwwONZWnBT0rCb5H841IHQRbL//hRW/eWCmy0bgWbDdl3/ifqhYtH\nUhkzgRfdAgMBAAECggEADiiBw9U1NI6WfxeD39VsWp3/0VHmb4Nvo6Sab3Q9FvL/\n670PRi9Zb1ZLYhFt5bv/ViQJhS6fue2Pe1gfYa3JI7rqPq9CyTuMv2j05DWk5aSF\n2VE/rDkgHeCM93pBueWspGpcHdCb0THEr+1TwwE+a/P1AOCtzsmm3VqbkmbN9b1p\nsS0h7sTRy4V0LdD98HIExXpK4X9bWhueNUPYr5qPsCz7dGmQxtrvfn0IEFtnBuNk\nZf4CMWFpiKk8LiegvgwWff9cx0MlWIkcnXYLcyvR7QWq4HvEMg34c4WlYBlvW6ss\n60mLvq82ldECFEXHN386riYm9hNtbfm7aoRLGc2FWQKBgQDvaZkXM0lJEnZ0VYpi\nCB15dJhbQYw3IH76XyBn41Q7yAsS1ZDS+pSB/ObS74Nc/EUAp9VjIy5/nvwtL/Z4\n77tGJO498QiWXqCoiKUaxyQH4DQlwbi8Ov4iMbyULb3vF0euUS9DPQVNJlWbUDAh\nqmeJmVcvpi5jvbdzPU0xofIbBQKBgQDqJ9brHaRAjjDBomEcth0Tn40kDZ1M938a\nclFD2p3mpPMkyRT4V7tPwvums9fWoV2iHWbTbpRpUgxtZMepTSciHEw/WZGatHnn\nD7lp3m383IR6huRLxfhidjUWv8hHrUCd3j+uPMUX0086pjIMfc1CXI9XM4bnVAVO\nWoqwnSqQ+QKBgHWcd5N5I2BdTIm71/5upCQdThdObRZLxXUztBS1DZVMoXwAJGQw\nqzHsTmyDMxJD75Xx3RcVmmshbBq6vCcPBf3geJU/SousMtp4PjuYZq/jyVpe/2Sg\nymV773sPuYWx9wnAYipy2J7c3SMuUmbHcpObG8SRq6pd8bgP/lMKjogNAoGBAJLo\n2AC/ojQWgiSa2k8HO4r6SbVbDVwi1A4ltzLZUMRKrXpg5tVBRfYvIXBf2YWBzJtP\n0xnIgTjrD3z7BAIGtAzEsFn2ulHT9b+wr+Xqdht1x3CQfV/FH6e2/mv9e4zs+GOT\n82RAIHBoVYc4iqIns8Z1CEHvxC4TGxkj2Wwhz3kRAoGAIqd/rPKSfEdPj4AiOpuC\np2EJB/ulMYdn8TrfshLEbG6/W3trgbV/QpfNVZs/0IMdkWQUVXz3br6hq/oqtcdm\n7PJT064UTlmRJxuwjiIvB3g5NemiZyNWDq0BvgMEBtajfXjBUbrgLfUb2tiK2Oqe\nJa1E8xUsSLszMDHW1WKc6i0=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-oo3g6@vinyl-store-31c54.iam.gserviceaccount.com",
+  "client_id": "114026672923879510314",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-oo3g6%40vinyl-store-31c54.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

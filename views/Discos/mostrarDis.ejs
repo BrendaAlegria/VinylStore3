@@ -1,0 +1,70 @@
+<%-include ("../templates/encaInici")%>
+<%- include ("../templates/encaInici")%>
+<% if (tipo === 'admin') { %>
+  <%- include ("../templates/menuUsuarios")%>
+<% } else { %>
+  <%- include ("../templates/menuAdmin")%>
+<% } %>
+<header>
+    <h1>Vinilos</h1>
+    <link rel="stylesheet" type="text/css" href="/web/css/ancho.css">
+</header>
+<div class="container mt-98 ancho-personalizado"  >
+    <div class="card" >
+        <div class="car-header">
+        </div>
+        <div class="car-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Artista</th>
+                            <th>Duracion</th>
+                            <th>Precio</th>
+                            <th>Foto</th>
+                            <!--
+                            <th>Audio</th>
+                            -->
+                            <th>Editar / Borrar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                        discos.forEach((disco)=>{
+                        %>
+                        <tr>
+                            <td><%= disco.id %></td>
+                            <td><%= disco.nombre %></td>
+                            <td><%= disco.artista %></td>
+                            <td><%= disco.duracion %></td>
+                            <td><%= disco.precio %></td>
+                            <td><img width="100px" height="100px" src="/images/<%=disco.foto %>"></td>
+                            <!--
+                            <td>
+                                <audio controls>
+                                    <source src="/audio/<%= disco.audio %>" type="audio/mp3">
+                                    Tu navegador no soporta el elemento de audio.
+                                </audio>
+                            </td>
+                        -->
+                            <td>
+                                <a href="/dis/dis/editarDis/<%= disco.id %>">Editar | </a>
+                                <a href="/dis/dis/borrarDis/<%= disco.id %>">Borrar</a>
+                            </td>
+                        </tr>
+                        <%
+                        });
+                        %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer"></div>
+        </div>
+    </div>
+</div>
+
+
+<%-  include("../templates/pie") %>
+
+

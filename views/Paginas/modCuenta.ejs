@@ -1,0 +1,39 @@
+<%- include ("../templates/encaInici")%>
+<% if (tipo == undefined) { %>
+    <%- include ("../templates/menuAdmin")%>
+<% } else { %>
+    <%- include ("../templates/menuUsuarios")%>
+<% } %>
+<header>
+    <h1>Modificar Mi Cuenta</h1>
+</header>
+<div class="container mt-5">
+    <form action="/modiCuenta/<%=usuarioId %>" method="POST" enctype="multipart/form-data">
+        <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+                <input type="hidden" name="id" id="id" value="<%= user.id%>">
+                <input type="hidden" name="passwordViejo" id="passwordViejo" value="<%= user.password%>">
+                <input type="hidden" name="fotoViejo" id="fotoViejo" value="<%= user.foto%>">
+                <input type="hidden" name="saltViejo" id="saltViejo" value="<%= user.salt%>">
+                <p>Nombre:</p>
+                <input class="form.control mb-3" type="text" value="<%= user.nombre%>" name="nombre" id="nombre"  placeholder="Nombre" autofocus>
+                <p>Usuario:</p>
+                <input class="form.contro mb-3" type="text" value="<%= user.usuario%>" name="usuario" id="usuario"  placeholder="Usuario" >
+                <p>Contraseña:</p>
+                <input class="form.control mb-3" type="password" name="password" id="password"  placeholder="Mantener el campo en blanco para no modificar" >
+                <p>Foto:</p>
+                <input class="form-control mb-3" type="file" name="foto" id="foto">
+            </div>
+            <div class="card-footer">
+                <button class="form-control btn btn-primary" type="submit">Estas Seguro que Quieres modificarla? , Si es si ,Da click aqui</button>
+            </div>
+            
+            </div>
+        </div>
+    </form>
+    <br>
+    <center><h2><a class="boton" href="/galeria">Cancelar </a></h2> </center><center><h2><a class="boton" href="/elimiCuen">Eliminar mi Cuenta </a></h2> </center>
+</div>
+<%- include ("../templates/pie")%>

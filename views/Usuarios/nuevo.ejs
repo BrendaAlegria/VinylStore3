@@ -1,0 +1,29 @@
+<%-include ("../templates/encaInici")%>
+<header>
+    <h1>Nuevo Usuario</h1>
+</header>
+<br>
+<br>
+<!-- <%- include ("../templates/menu")%> -->
+<div class="container mt-55">
+    <form action="/nuevousu" method="post" enctype="multipart/form-data"> 
+        <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+                <input class="form-control mb-3" type="text" name="nombre" id="nombre"  placeholder="Nombre" autofocus required>
+                <input class="form-control mb-3" type="text" name="usuario" id="usuario"  placeholder="Usuario"autofocus required>
+                <input class="form-control mb-3" type="password" name="password" id="password"  placeholder="Password"autofocus required >
+                <input class="form-control mb-3" type="file" name="foto" id="foto">
+            </div>
+            <div class="card-footer">
+                <button class="form-control btn btn-primary" type="submit">Guardar Usuario</button>
+            </div>
+            <div class="absolutee">
+                <h2><a class="boton" href="/login"> Regresar</a></h2> 
+            </div>
+            
+        </div>
+    </form>
+</div>
+<%- include ("../templates/pie")%>

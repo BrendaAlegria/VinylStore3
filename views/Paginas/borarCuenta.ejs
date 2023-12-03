@@ -1,0 +1,27 @@
+<%- include ("../templates/encaInici")%>
+<% if (tipo == undefined) { %>
+    <%- include ("../templates/menuAdmin")%>
+<% } else { %>
+    <%- include ("../templates/menuUsuarios")%>
+<% } %>
+<header>
+    <h1>Eliminacion de Cuenta</h1>
+</header>
+<center>
+    <div class="confirmation-container">
+        <div class="warning-message">
+            <br>
+            <h2>¿Estas seguro de borrar su cuenta?</h2>
+            <h2>Una vez eliminada no se podra restaurar  </h2>
+            <br>
+        </div>
+        <div class="buttons">
+            <a href="/elimiCuen/<%= usuarioId %>" >Sí, borrar cuenta</a>
+            <br>
+            <br>
+            <a href="/galeria" >No</a>
+        </div>
+    </div>
+</center>
+    
+<%- include ("../templates/pie")%>

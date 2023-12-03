@@ -1,0 +1,24 @@
+<%- include ("../templates/encaInici")%>
+<% if (tipo == undefined) { %>
+    <%- include ("../templates/menuAdmin")%>
+<% } else { %>
+    <%- include ("../templates/menuUsuarios")%>
+<% } %>
+<header>
+    <h1>Acerca de :</h1>
+    <div>
+        <p>Bienvenido a nuestra página de Vinilos. 
+            Somos apasionados por la música y hemos creado 
+            este espacio para compartir nuestra colección 
+            de vinilos con otros entusiastas. Descubre una 
+            amplia variedad de artistas, géneros y ediciones 
+            especiales que hemos recopilado a lo largo de los años. 
+            Esperamos que disfrutes explorando nuestra galería y encuentres algunas 
+            joyas musicales para tu propia colección.</p>
+
+    </div>
+    
+</header>
+
+
+<%- include ("../templates/pie")%>

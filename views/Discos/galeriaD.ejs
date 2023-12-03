@@ -1,0 +1,28 @@
+<%- include ("../templates/encaInici")%>
+<% if (tipo == undefined) { %>
+    <%- include ("../templates/menuUsuarios")%>
+<% } else { %>
+    <%- include ("../templates/menuAdmin")%>
+<% } %>
+<header>
+    <h1>Registro De Vinilos</h1>
+</header>
+    <h3>Usuarios y Vinilos a los cuales les dieron "Me Gusta"</h3>
+<div class="usuarios-meGusta">
+    <% usuariosConMeGusta.forEach((usuarioConMeGusta) => { %>
+        <div class="usuario">
+            <h2><%= usuarioConMeGusta.usuario.nombre %></h2>
+            <ul>
+                <% usuarioConMeGusta.vinilosMeGusta.forEach((vinilo) => { %>
+                    <li>
+                        <strong>Nombre del Vinilo:</strong> <%= vinilo.nombre %><br>
+                        <strong>Artista:</strong> <%= vinilo.artista %><br>
+                        <!-- Otros detalles del vinilo que quieras mostrar -->
+                    </li>
+                <% }); %>
+            </ul>
+        </div>
+    <% }); %>
+</div>
+
+<%- include ("../templates/pie")%>

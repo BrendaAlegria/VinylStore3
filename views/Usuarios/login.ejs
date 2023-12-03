@@ -1,0 +1,32 @@
+<%- include ("../templates/encaInici")%>
+<br>
+<header>
+    <h1>Iniciar Sesion</h1>
+</header>
+<br>
+<div class="container mt-4">
+    <form action="/login" method="post">
+        <div class="card">
+            <div class="car-header">
+            </div>
+            <div class="car-body"> 
+                <input requiere class="form-control mb-4" type="text" name="usuario" id="usuario" placeholder="Usuario" autofocus>
+                <input requiere class="form-control mb-4" type="password" name="password" id="password" placeholder="Password">
+            </div>
+            <br>
+            <input type="reset" value="Borrar Todo">
+            <br>
+            <div class="car-footer">
+                <button class="form-control  btn btn-primary" type="submit">Iniciar Sesion</button>
+            </div>
+            <br>
+            <div class="car-footer">
+                <center><a href="/nuevousu">No tienes cuenta? , Crea una cuenta</a></center>
+            </div>
+        </div>
+    </form>
+    <div class="absolutee">
+        <h2><a class="boton" href="/">Salir</a></h2> 
+    </div>
+</div>
+<%- include ("../templates/pie")%>

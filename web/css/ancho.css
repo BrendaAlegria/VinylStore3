@@ -1,0 +1,8 @@
+.ancho-personalizado {
+    width: 77%; /* Puedes ajustar este valor según tus preferencias */
+    margin: 0 auto; /* Esto centra el contenedor horizontalmente en la página */
+  }
+  .car-header {
+    margin-top: 10px; /* Puedes ajustar este valor según tus preferencias */
+    margin-bottom: 10px; /* Puedes ajustar este valor según tus preferencias */
+  }

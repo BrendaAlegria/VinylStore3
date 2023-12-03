@@ -1,0 +1,40 @@
+<%- include ("../templates/encaInici")%>
+<% if (tipo === 'admin') { %>
+    <%- include ("../templates/menuUsuarios")%>
+  <% } else { %>
+    <%- include ("../templates/menuAdmin")%>
+  <% } %>
+<header>
+    <h1>Modificar Disco</h1>
+</header>
+<br>
+<div class="container mt-5">
+    <form action="/dis/dis/editarDis" method="post" enctype="multipart/form-data"> 
+        <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+                <input type="hidden" name="id" id="id" value="<%= disc.id %>">
+                <input type="hidden" name="fotoVieja" id="fotoVieja" value="<%= disc.foto %>">
+                <p>Nombre del Album:</p>
+                <input class="form-control mb-3" type="text" value="<%= disc.nombre %>" name="nombre" id="nombre" placeholder="Nombre" autofocus>
+                <p>Artista:</p>
+                <input class="form-control mb-3" type="text" value="<%= disc.artista %>" name="artista" id="artista" placeholder="Artista">
+                <p>Duracion:</p>
+                <input class="form-control mb-3" type="text" value="<%= disc.duracion %>" name="duracion" id="duracion" placeholder="Duración">
+                <p>Precio:</p>
+                <input class="form-control mb-3" type="text" value="<%= disc.precio %>" name="precio" id="precio" placeholder="Precio">
+                <p>Foto:</p>
+                <input class="form-control mb-3" type="file" name="foto" id="foto" placeholder="Foto">
+                <!--
+                <p>Audio :</p>
+                <input class="form-control mb-3" type="file" name="audio" id="audio" placeholder="Foto">
+                -->
+            </div>
+            <div class="card-footer">
+                <button class="form-control btn btn-primary" type="submit">Modificar Vinilo</button>
+            </div>
+        </div>
+    </form>
+</div>
+<%- include ("../templates/pie")%>
